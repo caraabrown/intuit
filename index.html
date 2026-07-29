@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cara Brown — Service Design Walkthrough</title>
+<meta name="description" content="Visual walkthrough for live interview presentation.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Raleway:wght@300;400;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy-deep: #0f1828;
+  --navy: #1a2744;
+  --accent: #2a4080;
+  --accent-lt: #3a54a8;
+  --gold: #c8a96e;
+  --gold-lt: #e8d4a8;
+  --black: #0d0d0b;
+  --ink: #1e1e1c;
+  --mid: #888680;
+  --rule: #dddad3;
+  --off-white: #efede8;
+  --white: #ffffff;
+
+  --r-0: 0px; --r-1: 2px; --r-2: 4px; --r-3: 6px;
+  --sp-xs: 4px; --sp-sm: 8px; --sp-md: 12px; --sp-base: 16px;
+  --sp-lg: 24px; --sp-xl: 32px; --sp-2xl: 48px; --sp-3xl: 96px;
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Raleway', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body { min-height: 100dvh; font-family: var(--font-body); font-weight: 300; font-size: 16px; color: var(--off-white); background: var(--navy-deep); }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 300; line-height: 1.1; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+button { cursor: pointer; background: none; border: none; font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+
+.slide {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--sp-3xl) var(--sp-xl);
+  position: relative;
+  background: var(--navy-deep);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.slide-inner { max-width: 1100px; margin-inline: auto; width: 100%; }
+.slide-num { position: absolute; top: var(--sp-xl); right: var(--sp-xl); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; color: rgba(239,237,232,0.4); }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: var(--sp-lg); display: block; }
+
+.brand-mark { position: fixed; top: var(--sp-xl); left: var(--sp-xl); z-index: 50; display: flex; align-items: center; gap: var(--sp-md); }
+.brand-mark svg { width: 32px; height: 32px; color: var(--gold); }
+.brand-mark span { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; color: rgba(239,237,232,0.55); text-transform: uppercase; }
+
+.slide-title h1 { font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem); color: var(--off-white); max-width: 16ch; letter-spacing: -0.01em; }
+.slide-title h1 em { font-style: italic; color: var(--gold); }
+
+.hero-highlights { display: flex; gap: var(--sp-3xl); flex-wrap: wrap; margin-top: var(--sp-2xl); }
+.hero-highlights .stat { text-align: left; }
+.hero-highlights .stat .num { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); color: var(--gold); display: block; }
+.hero-highlights .stat .desc { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(239,237,232,0.55); max-width: 20ch; margin-top: var(--sp-sm); }
+
+.see-more { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: var(--sp-xl); border-bottom: 1px solid rgba(200,169,110,0.4); padding-bottom: 3px; }
+.see-more:hover { color: var(--gold-lt); border-color: var(--gold-lt); }
+.see-more svg { width: 12px; height: 12px; }
+
+.slide-visual .visual-frame { display: flex; flex-direction: column; align-items: center; gap: var(--sp-xl); }
+.slide-visual img { border-radius: var(--r-3); box-shadow: 0 20px 60px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); max-height: 58vh; width: auto; margin-inline: auto; }
+.slide-visual h2 { font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); color: var(--off-white); text-align: center; }
+.slide-visual .subline { font-size: 15px; font-weight: 300; color: rgba(239,237,232,0.75); text-align: center; max-width: 62ch; margin-inline: auto; line-height: 1.6; }
+.tag-row { display: flex; gap: var(--sp-md); justify-content: center; flex-wrap: wrap; }
+.tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(200,169,110,0.1); border: 1px solid rgba(200,169,110,0.3); color: var(--gold); padding: var(--sp-sm) var(--sp-base); border-radius: var(--r-1); }
+
+.fidelity-ladder { display: flex; flex-direction: column; gap: var(--sp-lg); margin-top: var(--sp-2xl); }
+.fidelity-level { display: grid; grid-template-columns: 140px 90px 1fr; gap: var(--sp-lg); align-items: center; padding-block: var(--sp-lg); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.fidelity-level:last-child { border-bottom: none; }
+.fidelity-level .lv-name { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+.fidelity-grid-swatch { display: grid; gap: 4px; }
+.fidelity-grid-swatch span { display: block; width: 100%; aspect-ratio: 1; border-radius: 2px; background: rgba(200,169,110,0.15); }
+.fidelity-grid-swatch span.on { background: var(--gold); }
+.fl1 .fidelity-grid-swatch { grid-template-columns: repeat(1, 1fr); }
+.fl2 .fidelity-grid-swatch { grid-template-columns: repeat(2, 1fr); }
+.fl3 .fidelity-grid-swatch { grid-template-columns: repeat(4, 1fr); }
+.fl4 .fidelity-grid-swatch { grid-template-columns: repeat(6, 1fr); }
+.fidelity-level .lv-desc { font-size: 15px; font-weight: 300; color: rgba(239,237,232,0.75); line-height: 1.5; }
+.fidelity-level .lv-desc strong { color: var(--off-white); font-weight: 700; }
+
+.fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-base); margin-top: var(--sp-2xl); }
+.fit-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-2); padding: var(--sp-lg); }
+.fit-item .req { font-family: var(--font-mono); font-size: 10px; color: rgba(239,237,232,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--sp-sm); }
+.fit-item .ev { font-size: 15px; color: var(--off-white); font-weight: 300; }
+.slide-fit h2 { font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); text-align: center; margin-bottom: 0; color: var(--off-white); }
+
+.dots { position: fixed; right: var(--sp-xl); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: var(--sp-md); z-index: 50; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: 180ms cubic-bezier(0.16,1,0.3,1); }
+.dot.active { background: var(--gold); transform: scale(1.5); }
+
+@media (max-width: 768px) {
+  .slide { padding: var(--sp-2xl) var(--sp-lg); }
+  .fit-grid { grid-template-columns: 1fr; }
+  .fidelity-level { grid-template-columns: 1fr; gap: var(--sp-sm); text-align: left; }
+  .fidelity-grid-swatch { justify-content: start; }
+  .dots { display: none; }
+  .brand-mark span { display: none; }
+  .hero-highlights { gap: var(--sp-xl); }
+}
+</style>
+</head>
+<body>
+
+<div class="brand-mark">
+  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Cara Brown mark">
+    <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="3.5"/>
+    <path d="M50 4 L50 50 L96 50" stroke="currentColor" stroke-width="3.5"/>
+    <path d="M50 50 L50 96" stroke="currentColor" stroke-width="3.5"/>
+    <path d="M50 73 L73 73" stroke="currentColor" stroke-width="3.5"/>
+    <path d="M73 50 L73 96" stroke="currentColor" stroke-width="3.5"/>
+  </svg>
+  <span>Cara Brown</span>
+</div>
+
+<div class="dots" id="dots"></div>
+
+<main>
+
+<section class="slide slide-title" id="s1">
+  <span class="slide-num">01 / 05</span>
+  <div class="slide-inner">
+    <span class="eyebrow">Intuit — Senior Service Designer</span>
+    <h1>Connecting frontline user experience to backstage infrastructures.</h1>
+    <a class="see-more" href="https://caraabrown.com" target="_blank" rel="noopener noreferrer" style="margin-top: var(--sp-2xl);">
+      caraabrown.com
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="slide slide-visual" id="s2">
+  <span class="slide-num">02 / 05</span>
+  <div class="slide-inner visual-frame">
+    <img src="assets/gigamap.png" alt="Zoomed-out systems map with heat-mapped pain point clusters" width="768" height="406" loading="lazy" decoding="async">
+    <h2>Gigamap</h2>
+    <p class="subline">Providing leadership on the ground truth with clarity.</p>
+    <div class="hero-highlights">
+      <div class="stat">
+        <span class="num">14 ft</span>
+        <span class="desc">printed, became a cross-functional reference</span>
+      </div>
+      <div class="stat">
+        <span class="num">20→&lt;5</span>
+        <span class="desc">years, enterprise wide rollout timeline compressed</span>
+      </div>
+      <div class="stat">
+        <span class="num">Enterprise</span>
+        <span class="desc">wide rollout, cross-functional adoption</span>
+      </div>
+    </div>
+    <a class="see-more" href="https://caraabrown.com/transportationstrategy/" target="_blank" rel="noopener noreferrer">
+      See more
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="slide slide-visual" id="s3">
+  <span class="slide-num">03 / 05</span>
+  <div class="slide-inner visual-frame">
+    <img src="assets/insight_snapshot.png" alt="Insight Snapshot one-page synthesis document" width="636" height="426" loading="lazy" decoding="async">
+    <h2>The Insight Snapshot</h2>
+    <p class="subline">A digestable combination of research synthesis, problem identification and valuation, clarifying root causes and enabling action all on 1 page.</p>
+    <a class="see-more" href="https://caraabrown.com/trailertracking/" target="_blank" rel="noopener noreferrer">
+      See more
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="slide slide-visual" id="s4">
+  <span class="slide-num">04 / 05</span>
+  <div class="slide-inner">
+    <h2 style="text-align:center;">Service Blueprinting</h2>
+    <p class="subline">4 levels of fidelity</p>
+    <div class="fidelity-ladder">
+      <div class="fidelity-level fl1">
+        <span class="lv-name">Level 01</span>
+        <div class="fidelity-grid-swatch"><span class="on"></span></div>
+        <p class="lv-desc"><strong>Basic</strong> singular steps along a service journey, single row. Shows just the highest-level steps in a process — even if not truly linear, still indicates the general journey. The highest-level "river journey," with initial stops only.</p>
+      </div>
+      <div class="fidelity-level fl2">
+        <span class="lv-name">Level 02</span>
+        <div class="fidelity-grid-swatch"><span></span><span class="on"></span><span class="on"></span><span></span></div>
+        <p class="lv-desc">Reinforces the first level of detail but with more clarity on smaller steps, still single row. Shows the river journey with initial stops and the smaller moments within those stops.</p>
+      </div>
+      <div class="fidelity-level fl3">
+        <span class="lv-name">Level 03</span>
+        <div class="fidelity-grid-swatch">
+          <span></span><span></span><span class="on"></span><span class="on"></span>
+          <span></span><span class="on"></span><span class="on"></span><span></span>
+        </div>
+        <p class="lv-desc">Reinforces the previous two levels at higher detail. Contains the basic anatomy of a service blueprint and speaks to initial pain points and interactivity — frontstage actors to backstage services — showing multiple rows to highlight multiple players in one area. Initial flows within stops, the players within those moments, and the pain points (problems to solve, opportunities) start to appear here.</p>
+      </div>
+      <div class="fidelity-level fl4">
+        <span class="lv-name">Level 04</span>
+        <div class="fidelity-grid-swatch">
+          <span></span><span class="on"></span><span></span><span class="on"></span><span></span><span class="on"></span>
+          <span class="on"></span><span></span><span class="on"></span><span></span><span class="on"></span><span></span>
+        </div>
+        <p class="lv-desc"><strong>Full complexity.</strong> Reinforces the previous three levels at the highest detail. Contains the full anatomy of a service blueprint — more flow-y, with single and multiple rows to show complexity. The river journey now carries deeper detail, speaking directly to complexities and pain points, with problems to solve and opportunities called out explicitly.</p>
+      </div>
+    </div>
+    <a class="see-more" href="https://caraabrown.com/merger/" target="_blank" rel="noopener noreferrer">
+      See more
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="slide slide-fit" id="s5">
+  <span class="slide-num">05 / 05</span>
+  <div class="slide-inner">
+    <h2>Where this maps to the role</h2>
+    <div class="fit-grid">
+      <div class="fit-item"><div class="req">Fieldwork, Frontstage &amp; Backstage</div><div class="ev">Distribution center observation</div></div>
+      <div class="fit-item"><div class="req">Prioritized Insight Synthesis</div><div class="ev">Insight Snapshot format</div></div>
+      <div class="fit-item"><div class="req">Service Blueprints → Systems</div><div class="ev">Gigamap + fidelity ladder</div></div>
+      <div class="fit-item"><div class="req">Outcomes Tied to Business</div><div class="ev">20yr → &lt;5yr enterprise wide rollout</div></div>
+      <div class="fit-item"><div class="req">Tact in Sensitive Contexts</div><div class="ev">Independent validation</div></div>
+      <div class="fit-item"><div class="req">Mature Operational Assets</div><div class="ev">Reusable snapshot template</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('dots');
+slides.forEach((s, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', () => s.scrollIntoView({behavior:'smooth'}));
+  dotsContainer.appendChild(dot);
+});
+const dotEls = dotsContainer.querySelectorAll('.dot');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = Array.from(slides).indexOf(e.target);
+      dotEls.forEach(d => d.classList.remove('active'));
+      dotEls[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => obs.observe(s));
+
+document.addEventListener('keydown', (e) => {
+  const current = Array.from(slides).findIndex(s => {
+    const r = s.getBoundingClientRect();
+    return r.top <= window.innerHeight/2 && r.bottom >= window.innerHeight/2;
+  });
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+    if (slides[current+1]) slides[current+1].scrollIntoView({behavior:'smooth'});
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    if (slides[current-1]) slides[current-1].scrollIntoView({behavior:'smooth'});
+  }
+});
+</script>
+
+</body>
+</html>
